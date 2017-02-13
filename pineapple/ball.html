@@ -19,7 +19,7 @@
             right: 0;
             left: 0;
             bottom: 0;
-            background-color: #A7C4EB;
+            background-image: url("https://upload.wikimedia.org/wikipedia/commons/3/3d/25_Meter_Precision_and_50_Meter_Pistol_Target.svg");
         }
         #ball {
             height: 50px;
@@ -41,8 +41,10 @@
         // make the ball move
         var x = 0;
         var dx = 5;
+        // speed
         var y = 0;
         var dy = 5;
+        // speed
         var ball = document.getElementById('ball');
         function changeColor() {
           var r = Math.floor(Math.random() * (255 - 1) + 1);
@@ -50,6 +52,35 @@
           var b = Math.floor(Math.random() * (255 - 1) + 1);
           ball.style.backgroundColor = "rgb(" + r + ", " + g + ", " + b + ")";
         }
+
+        document.addEventListener('keydown', function (e) {
+            //alert(e.keyCode)
+              // keycodes
+            if (e.keyCode == 37) {//left
+                //alert('left');
+                dx--;
+            } else if (e.keyCode == 39){//right
+                //alert('right');
+                dx++;
+            } else if (e.keyCode == 38){// up
+                //alert('up');
+                dy--;
+            } else if (e.keyCode == 40){// down
+                //alert('down');
+                dy++;
+            } else if (e.keyCode == 32){// space
+                ball.style.height = 200 + 'px';
+                ball.style.width = 200 + 'px';
+            } else if (e.keyCode == 65){// a
+                ball.style.height = 50 + 'px';
+                ball.style.width = 50 + 'px';
+            }
+
+
+        });
+
+
+
         changeColor();
         setInterval(function () {
             ball.style.top = y + 'px';
@@ -59,13 +90,16 @@
             if (y + 50 > window.innerHeight) {
                 dy *= -1;
                 y = window.innerHeight - 51;
+                changeColor();
             } else if (y < 0) {
                 dy *= -1;
                 y = 1;
+                changeColor();
             }
             if (x + 50 > window.innerWidth) {
                 dx *= -1;
                 x = window.innerWidth - 51;
+                changeColor();
             } else if (x < 0) {
                 dx *= -1;
                 x = 1;
